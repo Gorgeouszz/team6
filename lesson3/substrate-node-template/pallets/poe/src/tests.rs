@@ -87,3 +87,12 @@ fn transfer_claim_works(){
     
 }
 
+#[test]
+fn transfer_claim_failed_when_claim_not_exist(){
+    new_test_ext().execute_with(|| {
+        assert_noop!(
+            PoeModule::transfer_claim(Origin::signed(1),vec![0,5],2),
+            Error::<Test>::ClaimNotExist
+        );
+    })
+}

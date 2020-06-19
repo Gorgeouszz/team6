@@ -1,34 +1,28 @@
-## 第四课作业
+## 第三课作业  PoE 2
 
-试在 [Substrate Front-end Template](https://github.com/SubstrateCourse/substrate-front-end-template) 或 node.js (node.js 则以命令行介面)，实现以下功能：
+课程里会给出参考资料，大家一定要自己敲一遍**代码**！
 
-这一题是基于第三节课的第二题。之前 后端 有一个 map 从 文件的 hash 关联到 用户 AccountID。然在也要记录创建的时间，还有就是前端加个 text input 允许用户存证时输入一组不长于 256 字符串的备注。
+注：
 
-如果不确定确用什么 hash 函数的话，可用用 @polkadot/util-crypto ([NPM](https://www.npmjs.com/package/@polkadot/util-crypto)，[github](https://github.com/polkadot-js/common/tree/master/packages/util-crypto)) 内的 [blake2](https://github.com/polkadot-js/common/tree/master/packages/util-crypto/src/blake2) 或 [sha512](https://github.com/polkadot-js/common/tree/master/packages/util-crypto/src/sha512)。
+1. 提交源代码，运行`cargo test`的测试结果截图，前端UI的截图；
+2. 测试应覆盖所有的业务逻辑，如不同的错误场景，以及一切正常的情况下，检查存储的数据是不是预期的那样。
+3. 附加题不是必答的，但可以酌情加分。
+4. 代码修改在本目录 substrate-node-template 和 substrate-front-end-template 的程序文件里。
 
-用 node. js 的话，则是写一个类似函数：
+第一题：编写存证模块的单元测试代码，包括：
 
-```javascript
-// 取得 ApiPromise, 连到去远端 Substrate 节点的代码
+* 创建存证的测试用例；
+* 撤销存证的测试用例；
+* 转移存证的测试用例；
 
-function submitDocInfo(filePath, comment) {
-  // 把 filePath 档档案通过 hash 函数算出它的 hash 值。然后用 Polkadot-JS API 提交个个 extrinsics 到 Substrate
-}
-```
+第二题：编写存证模块的UI，包括
 
-附加题：这一题需要改动 前端 **及 Substrate 节点** 的代码。现在也加一个功能，允许前端输入一个 AccountID，遍历显示属于该用户的文件 hash, 其创建日期，及其备注
+* 创建存证的UI
+* 删除存证的UI
+* 转移存证的UI
 
-用 node.js 的话，则是写一个类似函数：
+第三题（附加题）：实现购买存证的功能代码：
 
-```javascript
-// 取得 ApiPromise, 连到去远端 Substrate 节点的代码
+* 用户A为自己的某个存证记录设置价格；
+* 用户B可以以一定的价格购买某个存证，当出价高于用户A设置的价格时，则以用户A设定的价格将费用从用户B转移到用户A，再将该存证进行转移。如果出价低于用户A的价格时，则不进行转移，返回错误。
 
-function getDocInfoFromAddr(addr) {
-  // 通过用户 addr, 取得他所有的创建文件的 hash及相关资料。返回值是：
-  // [{
-  //   docHash: ..., 
-  //   createdOn: ..., 
-  //   comment: ...
-  // }, {}, ...]
-}
-```
